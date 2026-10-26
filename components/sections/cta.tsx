@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { useMotionGate } from "@/hooks/useMotionGate"
 import Link from "next/link"
 import { ArrowUpRight, MessageCircle, Sparkles, Zap } from "lucide-react"
 
@@ -11,8 +12,27 @@ export default function CTA() {
   const buttonsGroupRef = useRef<HTMLDivElement>(null)
   const shockwaveRingRef = useRef<HTMLDivElement>(null)
 
+  const allowMotion = useMotionGate()
+
   useEffect(() => {
     let rafId: number
+
+    // Motion gate — hard-set finished state, no RAF.
+    if (!allowMotion) {
+      if (explosionCardRef.current) {
+        explosionCardRef.current.style.transform = "none"
+        explosionCardRef.current.style.filter = "none"
+        explosionCardRef.current.style.opacity = "1"
+      }
+      wordRefs.current.forEach((s) => {
+        if (!s) return
+        s.style.transform = "none"
+        s.style.filter = "none"
+        s.style.opacity = "1"
+      })
+      return
+    }
+
 
     // =========================================================================
     // DECONSTRUCTED PARTICLE WORD ASSEMBLY (OBYS 3D KINETIC EXPLOSION)
@@ -94,27 +114,27 @@ export default function CTA() {
     <div 
       ref={containerRef}
       id="komunitas" 
-      className="w-full max-w-[1580px] mx-auto py-20 px-4 sm:px-8 md:px-12 text-white select-none overflow-visible"
+      className="w-full max-w-[1580px] mx-auto py-20 px-4 sm:px-8 md:px-12 text-white overflow-visible"
       style={{ perspective: "1200px" }}
     >
       {/* Supernova Explosion Card Container */}
       <div 
         ref={explosionCardRef}
         style={{ transform: "perspective(1200px) scale(0.84) translateZ(-160px)", filter: "blur(5px)", opacity: 0.35 }}
-        className="p-8 sm:p-14 md:p-20 rounded-[50px] bg-gradient-to-br from-[#131a29] via-[#0d121d] to-[#07090e] border border-emerald-500/40 shadow-[0_-30px_130px_rgba(16,185,129,0.3)] relative overflow-hidden text-center space-y-9 will-change-[transform,filter,opacity]"
+        className="p-8 sm:p-14 md:p-20 rounded-[28px] bg-[#0d1117] border border-emerald-500/40 shadow-[0_24px_80px_rgba(0,0,0,0.6)] relative overflow-hidden text-center space-y-9 will-change-[transform,filter,opacity]"
       >
         {/* Shockwave Radial Kinetic Ring */}
         <div 
           ref={shockwaveRingRef}
           style={{ transform: "scale(0.5)", opacity: 0.9 }}
-          className="absolute inset-0 border-2 border-emerald-400/50 rounded-[50px] pointer-events-none will-change-[transform,opacity]"
+          className="absolute inset-0 border-2 border-emerald-400/50 rounded-[28px] pointer-events-none will-change-[transform,opacity]"
         />
 
         {/* Ambient Supernova Glows */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[380px] bg-gradient-to-r from-emerald-500/30 via-cyan-500/20 to-transparent rounded-full blur-[110px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[380px] bg-gradient-to-r from-emerald-500/30 via-#10B981/20 to-transparent rounded-full blur-[110px] pointer-events-none" />
 
         {/* Badge Indicator */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold border border-emerald-500/50 backdrop-blur-md shadow-lg shadow-emerald-500/25 relative z-10">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/50 backdrop-blur-md shadow-lg shadow-emerald-500/25 relative z-10">
           <Zap className="size-4 animate-bounce text-emerald-400" />
           <span>KOMUNITAS EKSKLUSIF &bull; ZERO RISK AFFILIATE</span>
         </div>
@@ -123,7 +143,7 @@ export default function CTA() {
             DECONSTRUCTED SUPERNOVA HEADLINE (MELEDAK DARI SEGALA ARAH MENJADI SATU!)
             ===================================================================== */}
         <div className="space-y-4 max-w-5xl mx-auto relative z-10 overflow-visible">
-          <h2 className="font-sans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-[-0.04em] text-white leading-[0.92] drop-shadow-2xl flex flex-wrap items-center justify-center gap-x-4 gap-y-2 overflow-visible">
+          <h2 className="font-sans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-[-0.04em] text-white leading-[0.92]  flex flex-wrap items-center justify-center gap-x-4 gap-y-2 overflow-visible">
             <span 
               ref={(el) => { wordRefs.current[0] = el }}
               className="inline-block will-change-[transform,filter,opacity]"
@@ -132,7 +152,7 @@ export default function CTA() {
             </span>
             <span 
               ref={(el) => { wordRefs.current[1] = el }}
-              className="inline-block bg-gradient-to-r from-emerald-400 via-white to-cyan-400 bg-clip-text text-transparent will-change-[transform,filter,opacity]"
+              className="inline-block bg-gradient-to-r from-emerald-400 via-white to-#34D399 bg-clip-text text-transparent will-change-[transform,filter,opacity]"
             >
               MELEDAKKAN
             </span>
@@ -164,7 +184,7 @@ export default function CTA() {
           <Link
             href="https://t.me/kahiyang_id"
             target="_blank"
-            className="px-9 py-5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold flex items-center gap-3 transition-all duration-300 shadow-2xl shadow-emerald-500/40 hover:scale-110 active:scale-95 group text-sm"
+            className="px-9 py-5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold flex items-center gap-3 transition-all duration-300 shadow-[0_8px_24px_rgba(16,185,129,0.25)] hover:scale-110 active:scale-95 group text-sm"
           >
             <MessageCircle className="size-5 group-hover:rotate-12 transition-transform" />
             <span>GABUNG TELEGRAM VIP</span>

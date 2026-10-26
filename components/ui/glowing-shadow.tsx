@@ -26,7 +26,7 @@ export default function Layanan() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
-            className="text-cyan-400 text-sm font-semibold tracking-widest uppercase"
+            className="text-#34D399 text-sm font-semibold tracking-widest uppercase"
           >
             LAYANAN KAMI
           </motion.span>
@@ -35,7 +35,7 @@ export default function Layanan() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="mt-3 text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent"
+            className="mt-3 text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-[#A1A8B3] to-white bg-clip-text text-transparent"
           >
             Eksplor Layanan Kami
           </motion.h2>
@@ -55,7 +55,7 @@ export default function Layanan() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="w-full h-[600px] md:h-[700px] rounded-2xl overflow-hidden border border-white/10"
+          className="w-full h-[600px] md:h-[700px] rounded-[16px] overflow-hidden border border-white/10"
         >
           <DynamicFrameLayout 
             frames={frames}

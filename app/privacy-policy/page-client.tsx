@@ -96,7 +96,7 @@ export default function PrivacyPolicyPage() {
             <p>
               Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, hubungi kami
               di:{" "}
-              <a href="mailto:admin@kahiyang.id" className="text-cyan-400 hover:underline">
+              <a href="mailto:admin@kahiyang.id" className="text-#34D399 hover:underline">
                 admin@kahiyang.id
               </a>
             </p>

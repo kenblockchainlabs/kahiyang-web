@@ -9,7 +9,7 @@ import Footer from "@/components/sections/footer"
 
 export default function Page() {
   return (
-    <main className="bg-[#07090e] text-white min-h-screen relative overflow-x-clip selection:bg-emerald-500 selection:text-black font-sans">
+    <main className="bg-[#07090e] text-white min-h-screen relative overflow-x-clip selection:bg-[#10B981] selection:text-black font-sans">
       
       {/* Floating HUD Navbar */}
       <Navbar />
@@ -26,7 +26,7 @@ export default function Page() {
       <ObysClipSection
         id="layanan"
         className="relative z-20 -mt-10"
-        innerClassName="bg-gradient-to-b from-[#080c16] via-[#0b1220] to-[#12100d] border-t border-cyan-500/20 py-20"
+        innerClassName="bg-[#07090e] border-t border-white/[0.06] py-20 md:py-28"
       >
         <div className="w-full max-w-[1580px] mx-auto px-4 sm:px-8 md:px-12">
           <Layanan />
@@ -37,7 +37,7 @@ export default function Page() {
       <ObysClipSection
         id="tentang"
         className="relative z-30 -mt-10"
-        innerClassName="bg-gradient-to-b from-[#12100d] via-[#1a140b] to-[#140a0e] border-t border-amber-500/25 py-20"
+        innerClassName="bg-[#07090e] border-t border-white/[0.06] py-20 md:py-28"
       >
         <div className="w-full max-w-[1580px] mx-auto px-4 sm:px-8 md:px-12">
           <Tentang />
@@ -48,7 +48,7 @@ export default function Page() {
       <ObysClipSection
         id="partnership"
         className="relative z-40 -mt-10"
-        innerClassName="bg-gradient-to-b from-[#140a0e] via-[#1b0c13] to-[#07090e] border-t border-emerald-500/30 py-20"
+        innerClassName="bg-[#07090e] border-t border-white/[0.06] py-20 md:py-28"
       >
         <div className="w-full max-w-[1580px] mx-auto px-4 sm:px-8 md:px-12">
           <CTA />

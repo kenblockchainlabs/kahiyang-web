@@ -98,7 +98,7 @@ insidental, atau konsekuensial yang timbul dari penggunaan atau ketidakmampuan
             <h2 className="text-2xl font-semibold text-white mb-3">8. Kontak</h2>
             <p>
               Untuk pertanyaan tentang Syarat dan Ketentuan ini, hubungi kami di:{" "}
-              <a href="mailto:admin@kahiyang.id" className="text-cyan-400 hover:underline">
+              <a href="mailto:admin@kahiyang.id" className="text-#34D399 hover:underline">
                 admin@kahiyang.id
               </a>
             </p>
