@@ -19,7 +19,7 @@ export default function MarqueeTicker() {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative z-20 w-full overflow-hidden my-3 py-2.5 border-y border-white/10 bg-[#07090e]/85 backdrop-blur-xl select-none"
+      className="relative z-20 w-full overflow-hidden my-3 py-2.5 border-y border-white/10 glass-overlay select-none"
     >
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />

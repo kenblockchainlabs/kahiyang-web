@@ -69,7 +69,7 @@ export default function Tentang() {
       <div 
         ref={cardRef}
         style={{ transform: "perspective(1200px) rotateX(12deg) scale(0.90)", opacity: 0.35 }}
-        className="p-8 sm:p-14 md:p-18 rounded-[48px] bg-gradient-to-br from-[#16120c] via-[#0f0c08] to-[#070503] border border-amber-500/30 shadow-[0_-30px_120px_rgba(245,210,89,0.18)] relative overflow-hidden will-change-transform space-y-10"
+        className="p-8 sm:p-14 md:p-18 rounded-[48px] glass border border-amber-500/30 shadow-[0_-30px_120px_rgba(245,210,89,0.18)] relative overflow-hidden will-change-transform space-y-10"
       >
         <div className="absolute -left-24 -bottom-24 w-96 h-96 bg-amber-500/15 rounded-full blur-[110px] pointer-events-none" />
         <div className="absolute -right-24 -top-24 w-96 h-96 bg-yellow-600/10 rounded-full blur-[110px] pointer-events-none" />
@@ -82,7 +82,7 @@ export default function Tentang() {
             <span>VOLUME XXIV</span>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-7xl md:text-8xl font-black tracking-tight text-white uppercase py-2 drop-shadow-2xl">
+          <h1 className="font-display text-4xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-white uppercase py-2">
             BINAR PAGI NUSANTARA
           </h1>
 
@@ -109,7 +109,7 @@ export default function Tentang() {
                 <span>OFFICIAL MEDIA PARTNER &bull; PERADABAN DIGITAL</span>
               </div>
 
-              <h2 className="font-sans text-2xl sm:text-4xl font-black text-white uppercase tracking-tight leading-tight">
+              <h2 className="font-display text-2xl sm:text-4xl font-bold text-white uppercase leading-tight">
                 Bersinergi Membangun <br />
                 <span className="bg-gradient-to-r from-[#f5d259] via-amber-200 to-[#f55a3c] bg-clip-text text-transparent font-serif italic lowercase text-[0.88em]">
                   literasi sains berkeadaban.

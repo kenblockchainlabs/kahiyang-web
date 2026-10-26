@@ -101,7 +101,7 @@ export default function CTA() {
       <div 
         ref={explosionCardRef}
         style={{ transform: "perspective(1200px) scale(0.84) translateZ(-160px)", filter: "blur(5px)", opacity: 0.35 }}
-        className="p-8 sm:p-14 md:p-20 rounded-[50px] bg-gradient-to-br from-[#131a29] via-[#0d121d] to-[#07090e] border border-emerald-500/40 shadow-[0_-30px_130px_rgba(16,185,129,0.3)] relative overflow-hidden text-center space-y-9 will-change-[transform,filter,opacity]"
+        className="p-8 sm:p-14 md:p-20 rounded-[50px] glass border border-emerald-500/40 shadow-[0_-30px_130px_rgba(16,185,129,0.3)] relative overflow-hidden text-center space-y-9 will-change-[transform,filter,opacity]"
       >
         {/* Shockwave Radial Kinetic Ring */}
         <div 
@@ -123,7 +123,7 @@ export default function CTA() {
             DECONSTRUCTED SUPERNOVA HEADLINE (MELEDAK DARI SEGALA ARAH MENJADI SATU!)
             ===================================================================== */}
         <div className="space-y-4 max-w-5xl mx-auto relative z-10 overflow-visible">
-          <h2 className="font-sans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-[-0.04em] text-white leading-[0.92] drop-shadow-2xl flex flex-wrap items-center justify-center gap-x-4 gap-y-2 overflow-visible">
+          <h2 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold uppercase text-white leading-[0.92] flex flex-wrap items-center justify-center gap-x-4 gap-y-2 overflow-visible">
             <span 
               ref={(el) => { wordRefs.current[0] = el }}
               className="inline-block will-change-[transform,filter,opacity]"

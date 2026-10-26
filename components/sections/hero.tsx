@@ -164,7 +164,7 @@ export default function Hero() {
             y="142"
             className="font-black text-[165px] tracking-[-0.045em] uppercase select-none"
             fill="url(#chromeSheen)"
-            style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}
+            style={{ fontFamily: "var(--font-display), system-ui, sans-serif", fontVariationSettings: '"opsz" 96, "wdth" 88' }}
           >
             {"KAHIYANG".split("").map((char, index) => (
               <tspan
@@ -192,7 +192,7 @@ export default function Hero() {
             <span>TALENTA TIKTOK AFFILIATE, KELAS MENTORING &amp; WEB DEVELOPMENT</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white uppercase tracking-tight leading-[0.92]">
+          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-extrabold text-white uppercase leading-[0.92]">
             Arsitektur Pertumbuhan <br />
             <span className="bg-gradient-to-r from-white via-zinc-100 to-emerald-400 bg-clip-text text-transparent font-serif italic lowercase text-[0.88em]">
               tanpa batas.
@@ -227,7 +227,7 @@ export default function Hero() {
           {/* POD 1: AGENCY PERFORMANCE POD */}
           <div 
             ref={leftCardRef}
-            className="p-5 sm:p-6 rounded-[34px] bg-gradient-to-b from-white/[0.12] via-white/[0.04] to-black/80 border border-white/20 hover:border-emerald-500/70 shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl will-change-transform origin-center group"
+            className="glass p-5 sm:p-6 rounded-[34px] hover:shadow-glass-hover will-change-transform origin-center group"
           >
             <div className="flex items-center justify-between font-mono text-[10px] text-zinc-400 mb-3">
               <span className="text-emerald-400 font-bold flex items-center gap-1.5">
@@ -266,7 +266,7 @@ export default function Hero() {
           {/* POD 2: TALENT NETWORK VIP POD */}
           <div 
             ref={rightCardRef}
-            className="p-5 sm:p-6 rounded-[34px] bg-gradient-to-b from-white/[0.12] via-white/[0.04] to-black/80 border border-white/20 hover:border-cyan-500/70 shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl will-change-transform origin-center group"
+            className="glass p-5 sm:p-6 rounded-[34px] hover:shadow-glass-hover will-change-transform origin-center group"
           >
             <div className="flex items-center justify-between font-mono text-[10px] text-zinc-400 mb-3">
               <span className="text-cyan-400 font-bold flex items-center gap-1.5">
@@ -312,7 +312,7 @@ export default function Hero() {
       {/* 4 BOX KOLOM MINIMALIS DENGAN PULSE GLOW ELEGAN */}
       <div className="relative z-30 pt-4 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-[11px]">
         {/* 01: Agency */}
-        <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-emerald-500/40 backdrop-blur-md transition-all flex flex-col justify-between group">
+        <div className="glass glass-sm p-3.5 rounded-2xl transition-all flex flex-col justify-between group">
           <div className="flex items-center justify-between mb-1.5">
             <span className="text-white font-bold block">01 / AGENCY</span>
             <span className="relative flex size-2">
@@ -324,7 +324,7 @@ export default function Hero() {
         </div>
 
         {/* 02: Studio */}
-        <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-cyan-500/40 backdrop-blur-md transition-all flex flex-col justify-between group">
+        <div className="glass glass-sm p-3.5 rounded-2xl transition-all flex flex-col justify-between group">
           <div className="flex items-center justify-between mb-1.5">
             <span className="text-white font-bold block">02 / STUDIO</span>
             <span className="relative flex size-2">

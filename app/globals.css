@@ -2,93 +2,234 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* ==========================================================================
+   BASE
+   ========================================================================== */
 html {
   overscroll-behavior: none;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: #f4f4f5;
+  background: #07090e;
+  font-family: var(--font-body), Inter, system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
 }
 
-/* Motion blur blob A */
-@keyframes motionBlurA {
-  0%   { transform: translate(0, 0) scale(1); }
-  15%  { transform: translate(30px, -20px) scale(1.1) rotate(5deg); }
-  30%  { transform: translate(-20px, 15px) scale(0.95) rotate(-3deg); }
-  50%  { transform: translate(15px, 25px) scale(1.08) rotate(2deg); }
-  65%  { transform: translate(-25px, -10px) scale(1) rotate(-4deg); }
-  80%  { transform: translate(10px, -30px) scale(1.05) rotate(3deg); }
-  100% { transform: translate(0, 0) scale(1); }
+/* ==========================================================================
+   TYPOGRAPHY — four faces, four jobs
+   Display: Bricolage Grotesque (optical-size + width axes)
+   Accent:  Instrument Serif, 400 italic ONLY — never bold
+   Mono:    JetBrains Mono (instrumentation, not code editor)
+   Body:    Inter Tight
+   ========================================================================== */
+.font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-variation-settings: "opsz" 96, "wdth" 90;
+  letter-spacing: -0.045em;
 }
 
-/* Motion blur blob B */
-@keyframes motionBlurB {
-  0%   { transform: translate(0, 0) scale(1); }
-  20%  { transform: translate(-25px, 20px) scale(1.05) rotate(-3deg); }
-  40%  { transform: translate(20px, -15px) scale(0.9) rotate(4deg); }
-  55%  { transform: translate(-10px, -25px) scale(1.1) rotate(-2deg); }
-  75%  { transform: translate(25px, 10px) scale(0.95) rotate(5deg); }
-  100% { transform: translate(0, 0) scale(1); }
+.font-accent,
+.font-serif {
+  font-family: var(--font-accent), Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: italic;
+  letter-spacing: -0.01em;
 }
 
-/* Beep */
-@keyframes beep {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-.animate-beep {
-  animation: beep 1.5s ease-in-out infinite;
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* ==========================================================================
+   GLASS PANE — the master recipe (4 layers)
+   L1 blur engine · L2 body tint · L3 gradient border · L4 shadow stack
+   L5 specular sheen sweep on hover
+
+   THE RULE: never let the background gradient terminate at black.
+   The bottom stop stays at rgba(255,255,255,0.06) or higher. Weight at
+   the bottom comes from the inset shadow, not from opacity.
+   ========================================================================== */
+.glass {
+  position: relative;
+  isolation: isolate;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(112%);
+  backdrop-filter: blur(24px) saturate(180%) brightness(112%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.10) 0%,
+    rgba(255, 255, 255, 0.04) 42%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 -24px 44px -28px rgba(0, 0, 0, 0.65),
+    0 1px 2px rgba(0, 0, 0, 0.40),
+    0 8px 24px -8px rgba(0, 0, 0, 0.60),
+    0 32px 64px -24px rgba(0, 0, 0, 0.75),
+    0 0 80px -20px rgba(16, 185, 129, 0.18);
+}
+
+/* L3 — gradient border. Light from top-left. One pseudo-element, no extra DOM. */
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.10) 28%,
+    rgba(255, 255, 255, 0.04) 55%,
+    rgba(255, 255, 255, 0.16) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* L5 — specular sheen sweep. One transition, zero JS. */
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.10) 47%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.10) 53%,
+    transparent 60%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+.glass:hover::after { transform: translateX(120%); }
+
+/* Smaller panes need less blur */
+.glass-sm {
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+}
+
+/* Overlay plane — navbar, ticker */
+.glass-overlay {
+  -webkit-backdrop-filter: blur(40px) saturate(160%);
+  backdrop-filter: blur(40px) saturate(160%);
+  background: rgba(7, 9, 14, 0.55);
+}
+
+/* Deepest plane — mobile menu */
+.glass-modal {
+  -webkit-backdrop-filter: blur(64px) saturate(140%);
+  backdrop-filter: blur(64px) saturate(140%);
+  background: rgba(7, 9, 14, 0.72);
+}
+
+/* ==========================================================================
+   LIGHT RIG — aurora drift
+   ========================================================================== */
+@keyframes auroraDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(60px, -40px) scale(1.12); }
+  66%      { transform: translate(-45px, 30px) scale(0.94); }
+}
+.aurora-a { animation: auroraDrift 24s ease-in-out infinite; }
+.aurora-b { animation: auroraDrift 31s ease-in-out infinite reverse; }
+
+/* ==========================================================================
+   GRAIN + VIGNETTE
+   ========================================================================== */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ==========================================================================
+   FOCUS + SELECTION
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid #34D399;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #05070b; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover { background: #0B7A5C; }
+
+/* ==========================================================================
+   MOBILE — frame budget
+   ========================================================================== */
+@media (max-width: 767px) {
+  /* Grain halved — overlay blend is fill-rate */
+  .grain-overlay { opacity: 0.025; }
+
+  /* Kill the 130-150px blurs — most expensive thing on the page */
+  .aurora-blob { filter: blur(80px) !important; }
+
+  /* Glass: drop to 16px blur, static sheen (no transition) */
+  .glass {
+    -webkit-backdrop-filter: blur(16px) saturate(140%) brightness(108%);
+    backdrop-filter: blur(16px) saturate(140%) brightness(108%);
   }
+  .glass::after {
+    transform: translateX(-120%);
+    opacity: 0.06;
+    transition: none;
+  }
+
+  /* Contain section shells so off-screen layout/paint is skipped */
+  .section-shell {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+  }
+
+  /* Aurora slower on mobile, no will-change waste */
+  .aurora-a { animation-duration: 40s; }
+  .aurora-b { animation-duration: 46s; }
 }
 
-/* Auto-scroll animation for layanan preview */
-@keyframes autoScroll {
-  0% { object-position: top; }
-  100% { object-position: bottom; }
-}
-
-/* Infinite carousel scroll */
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.animate-scroll {
-  animation: scroll 20s linear infinite;
-}
-.animate-scroll:hover {
-  animation-play-state: paused;
-}
-
-/* Infinite Ticker Keyframes */
-@keyframes tickerLoop {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
-}
-.animate-ticker {
-  display: inline-block;
-  animation: tickerLoop 30s linear infinite;
-  will-change: transform;
+/* ==========================================================================
+   REDUCED MOTION — always respect the OS setting
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-a, .aurora-b, .animate-ticker, .animate-scroll {
+    animation: none !important;
+  }
+  .glass::after { display: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

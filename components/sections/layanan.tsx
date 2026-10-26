@@ -113,7 +113,7 @@ export default function Layanan() {
             <span className="text-zinc-400">&bull;</span>
             <span className="text-zinc-300 uppercase tracking-widest font-mono">CORE SERVICES &bull; 3D FLIP ARCHITECTURE</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-black text-white uppercase tracking-[-0.04em] leading-[0.92] font-sans">
+          <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold text-white uppercase leading-[0.92]">
             Eksplor Layanan <br />
             <span className="bg-gradient-to-r from-white via-zinc-200 to-emerald-400 bg-clip-text text-transparent font-serif italic lowercase text-[0.88em]">
               ekosistem kami.
@@ -145,7 +145,7 @@ export default function Layanan() {
                 opacity: 0.35,
                 transformStyle: "preserve-3d"
               }}
-              className={`p-8 sm:p-10 rounded-[38px] bg-gradient-to-br from-[#121622] via-[#0d1017] to-[#07090e] border border-white/20 hover:border-emerald-500/60 shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col justify-between group relative overflow-hidden will-change-transform ${
+              className={`p-8 sm:p-10 rounded-[38px] glass hover:border-emerald-500/60 shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col justify-between group relative overflow-hidden will-change-transform ${
                 isFull ? "md:col-span-2 border-emerald-500/40 bg-gradient-to-r from-[#121a28] via-[#0d141e] to-[#07090e]" : ""
               }`}
             >
@@ -163,7 +163,7 @@ export default function Layanan() {
                   <div className="size-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:scale-110 group-hover:border-emerald-500 transition-all">
                     <Icon className="size-6 text-emerald-400" />
                   </div>
-                  <h3 className="font-sans text-2xl sm:text-3xl font-black text-white group-hover:text-emerald-400 transition-colors">
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-white group-hover:text-emerald-400 transition-colors">
                     {srv.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-zinc-200 font-light leading-relaxed">

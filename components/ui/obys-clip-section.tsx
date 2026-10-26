@@ -89,8 +89,12 @@ export default function ObysClipSection({
         <div
           ref={innerContentRef}
           style={{ transform: "translate3d(0, 80px, 0)" }}
-          className={`w-full will-change-transform ${innerClassName}`}
+          className={`w-full will-change-transform relative ${innerClassName}`}
         >
+          {/* Light seam — a 1px line bright in the centre, fading at both ends,
+              sitting on a bloom. Replaces the hard border-t divider. */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent pointer-events-none" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[80px] bg-emerald-500/20 rounded-full blur-[40px] pointer-events-none" />
           {children}
         </div>
       </div>
