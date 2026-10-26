@@ -134,8 +134,8 @@ export default function Layanan() {
         <div className="space-y-3">
           <div className="flex items-center gap-2 text-xs">
             <span className="text-emerald-400 font-bold font-mono">(02) PILAR UTAMA</span>
-            <span className="text-zinc-500">&bull;</span>
-            <span className="text-zinc-400 uppercase tracking-widest font-mono">CORE SERVICES &bull; 3D FLIP ARCHITECTURE</span>
+            <span className="text-zinc-400">&bull;</span>
+            <span className="text-zinc-300 uppercase tracking-widest font-mono">CORE SERVICES &bull; 3D FLIP ARCHITECTURE</span>
           </div>
           <h2 className="text-4xl sm:text-6xl md:text-7xl font-black text-white uppercase tracking-[-0.04em] leading-[0.92] font-sans">
             Eksplor Layanan <br />
@@ -145,7 +145,7 @@ export default function Layanan() {
           </h2>
         </div>
 
-        <p className="font-sans text-sm sm:text-base text-zinc-400 font-light leading-relaxed max-w-md">
+        <p className="font-sans text-sm sm:text-base text-zinc-300 font-light leading-relaxed max-w-md">
           Seluruh pilar teknologi, talenta, dan studio visual dirancang saling terhubung untuk melipatgandakan dampak bisnis dan pertumbuhan Anda.
         </p>
       </div>
@@ -169,7 +169,7 @@ export default function Layanan() {
                 opacity: 0.35,
                 transformStyle: "preserve-3d"
               }}
-              className={`p-8 sm:p-10 rounded-[38px] bg-gradient-to-br from-[#121622] via-[#0d1017] to-[#07090e] border border-white/15 hover:border-emerald-500/60 shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col justify-between group relative overflow-hidden will-change-transform ${
+              className={`p-8 sm:p-10 rounded-[38px] bg-gradient-to-br from-[#121622] via-[#0d1017] to-[#07090e] border border-white/20 hover:border-emerald-500/60 shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col justify-between group relative overflow-hidden will-change-transform ${
                 isFull ? "md:col-span-2 border-emerald-500/40 bg-gradient-to-r from-[#121a28] via-[#0d141e] to-[#07090e]" : ""
               }`}
             >
@@ -177,7 +177,7 @@ export default function Layanan() {
 
               <div className="relative z-10 space-y-6">
                 <div className="flex items-center justify-between font-mono text-xs">
-                  <span className="text-zinc-500 font-bold">{srv.num}</span>
+                  <span className="text-zinc-400 font-bold">{srv.num}</span>
                   <span className={`px-3 py-1 rounded-full border bg-white/5 font-mono text-[10px] font-bold ${srv.accent}`}>
                     {srv.tagline}
                   </span>
@@ -190,14 +190,14 @@ export default function Layanan() {
                   <h3 className="font-sans text-2xl sm:text-3xl font-black text-white group-hover:text-emerald-400 transition-colors">
                     {srv.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-zinc-300 font-light leading-relaxed">
+                  <p className="text-xs sm:text-sm text-zinc-200 font-light leading-relaxed">
                     {srv.desc}
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-3 border-t border-white/10">
                   {srv.metrics.map((m, i) => (
-                    <div key={i} className="flex items-center gap-2 font-mono text-[11px] text-zinc-300">
+                    <div key={i} className="flex items-center gap-2 font-mono text-[11px] text-zinc-200">
                       <CheckCircle2 className="size-3.5 text-emerald-400 flex-shrink-0" />
                       <span>{m}</span>
                     </div>
@@ -206,7 +206,7 @@ export default function Layanan() {
               </div>
 
               <div className="pt-6 mt-6 border-t border-white/10 flex items-center justify-between relative z-10">
-                <span className="font-mono text-xs text-zinc-500 group-hover:text-white transition-colors">
+                <span className="font-mono text-xs text-zinc-400 group-hover:text-white transition-colors">
                   JELAJAHI PLATFORM &bull; KONSULTASI
                 </span>
                 <Link

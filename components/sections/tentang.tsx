@@ -131,7 +131,7 @@ export default function Tentang() {
                 <span>BACA JURNAL LENGKAP</span>
                 <ArrowUpRight className="size-4" />
               </Link>
-              <span className="text-[10px] font-mono text-zinc-500">Hal. 01 Tajuk</span>
+              <span className="text-[10px] font-mono text-zinc-400">Hal. 01 Tajuk</span>
             </div>
           </div>
 
@@ -159,15 +159,15 @@ export default function Tentang() {
               <div className="grid grid-cols-3 gap-2 pt-2 font-mono text-[10px]">
                 <div className="p-2.5 rounded-xl bg-white/[0.04] border border-amber-500/20 text-center">
                   <span className="text-[#f5d259] font-bold block text-xs">101+</span>
-                  <span className="text-zinc-500">Warta Sains</span>
+                  <span className="text-zinc-400">Warta Sains</span>
                 </div>
                 <div className="p-2.5 rounded-xl bg-white/[0.04] border border-amber-500/20 text-center">
                   <span className="text-amber-400 font-bold block text-xs">Jawa Timur</span>
-                  <span className="text-zinc-500">Pers Mandiri</span>
+                  <span className="text-zinc-400">Pers Mandiri</span>
                 </div>
                 <div className="p-2.5 rounded-xl bg-white/[0.04] border border-amber-500/20 text-center">
                   <span className="text-white font-bold block text-xs">AI Lab</span>
-                  <span className="text-zinc-500">Riset Terapan</span>
+                  <span className="text-zinc-400">Riset Terapan</span>
                 </div>
               </div>
             </div>
