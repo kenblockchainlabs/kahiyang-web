@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react"
 import Link from "next/link"
 import { ArrowUpRight, CheckCircle2, Code2, Flame, Users } from "lucide-react"
-import { useMotionGate, useSettledProgress } from "@/hooks/useMotionGate"
 
 const SERVICES = [
   {
@@ -26,8 +25,8 @@ const SERVICES = [
     desc: "Pelatihan live dan playbook taktis menghasilkan puluhan juta dari TikTok Shop tanpa harus joget-joget atau punya modal besar.",
     href: "#komunitas",
     icon: Flame,
-    color: "from-#10B981/20 to-transparent",
-    accent: "text-#34D399 border-#10B981/30",
+    color: "from-purple-500/20 to-transparent",
+    accent: "text-purple-400 border-purple-500/30",
     metrics: ["1,200+ Alumni", "Komunitas Private Telegram", "Daily Q&A Mentoring"],
   },
   {
@@ -38,8 +37,8 @@ const SERVICES = [
     desc: "Bikin website dan landing page sesuai kebutuhan bisnis. Desain responsif, loading cepat, dan struktur yang jelas supaya pengunjung tahu harus ngapain.",
     href: "https://t.me/kahiyang_partnership",
     icon: Code2,
-    color: "from-#10B981/25 via-emerald-500/15 to-transparent",
-    accent: "text-#34D399 border-#10B981/40",
+    color: "from-cyan-500/25 via-emerald-500/15 to-transparent",
+    accent: "text-cyan-400 border-cyan-500/40",
     metrics: ["Zero Templates", "Mobile-First", "Fast Load"],
     isFullWidth: true
   },
@@ -47,22 +46,8 @@ const SERVICES = [
 
 export default function Layanan() {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
-  const allowMotion = useMotionGate()
-  const settled = useSettledProgress()
 
   useEffect(() => {
-    // Motion gate: hard-set the FINISHED state and start no RAF loop.
-    // Without this, a dropped frame budget leaves every card parked at
-    // opacity 0.35 with a 32deg rotation — which is what reads as broken.
-    if (!allowMotion) {
-      cardsRef.current.forEach((card) => {
-        if (!card) return
-        card.style.transform = "none"
-        card.style.opacity = "1"
-      })
-      return
-    }
-
     let rafId: number
 
     // =========================================================================
@@ -80,8 +65,7 @@ export default function Layanan() {
         const triggerStart = windowHeight * 0.98
         const triggerEnd = windowHeight * 0.22
         const rawProg = (triggerStart - rect.top) / (triggerStart - triggerEnd)
-        // Damped so the transform converges even when frames drop
-        const progress = Math.max(0, Math.min(1, settled.step(Math.max(0, Math.min(1, rawProg)))))
+        const progress = Math.max(0, Math.min(1, rawProg))
 
         const isOdd = index % 2 === 0
         const isFull = SERVICES[index]?.isFullWidth
@@ -119,7 +103,7 @@ export default function Layanan() {
   }, [])
 
   return (
-    <div className="space-y-12 overflow-visible" style={{ perspective: "1400px" }}>
+    <div className="space-y-12 select-none overflow-visible" style={{ perspective: "1400px" }}>
       
       {/* Header Section dengan Telemetri Tajam */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8 font-mono">
@@ -161,8 +145,8 @@ export default function Layanan() {
                 opacity: 0.35,
                 transformStyle: "preserve-3d"
               }}
-              className={`p-8 sm:p-10 rounded-[28px] bg-[#0d1117] border border-white/20 hover:border-emerald-500/60 shadow-[0_24px_80px_rgba(0,0,0,0.6)] flex flex-col justify-between group relative overflow-hidden will-change-transform ${
-                isFull ? "md:col-span-2 border-emerald-500/40 bg-[#0d1117]" : ""
+              className={`p-8 sm:p-10 rounded-[38px] bg-gradient-to-br from-[#121622] via-[#0d1017] to-[#07090e] border border-white/20 hover:border-emerald-500/60 shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col justify-between group relative overflow-hidden will-change-transform ${
+                isFull ? "md:col-span-2 border-emerald-500/40 bg-gradient-to-r from-[#121a28] via-[#0d141e] to-[#07090e]" : ""
               }`}
             >
               <div className={`absolute top-0 right-0 w-72 h-72 bg-gradient-to-b ${srv.color} rounded-full blur-3xl pointer-events-none`} />
@@ -170,13 +154,13 @@ export default function Layanan() {
               <div className="relative z-10 space-y-6">
                 <div className="flex items-center justify-between font-mono text-xs">
                   <span className="text-zinc-400 font-bold">{srv.num}</span>
-                  <span className={`px-3 py-1 rounded-full border bg-white/5 text-[11px] font-bold ${srv.accent}`}>
+                  <span className={`px-3 py-1 rounded-full border bg-white/5 font-mono text-[10px] font-bold ${srv.accent}`}>
                     {srv.tagline}
                   </span>
                 </div>
 
                 <div className="space-y-3">
-                  <div className="size-12 rounded-[16px] bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:scale-110 group-hover:border-emerald-500 transition-all">
+                  <div className="size-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:scale-110 group-hover:border-emerald-500 transition-all">
                     <Icon className="size-6 text-emerald-400" />
                   </div>
                   <h3 className="font-sans text-2xl sm:text-3xl font-black text-white group-hover:text-emerald-400 transition-colors">

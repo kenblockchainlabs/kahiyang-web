@@ -46,7 +46,7 @@ export default function ZoomSection({
           {["top-0 left-0", "top-0 right-0", "bottom-0 left-0", "bottom-0 right-0"].map((pos) => (
             <div
               key={pos}
-              className={"absolute " + pos + " w-2 h-2 rounded-full bg-#10B981/40"}
+              className={"absolute " + pos + " w-2 h-2 rounded-full bg-cyan-500/40"}
             />
           ))}
         </div>

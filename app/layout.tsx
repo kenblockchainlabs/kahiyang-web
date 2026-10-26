@@ -1,14 +1,8 @@
 import type { Metadata, Viewport } from "next"
-import { Inter, Instrument_Serif } from "next/font/google"
+import { Inter } from "next/font/google"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-serif",
-})
+const inter = Inter({ subsets: ["latin"] })
 
 import LenisProvider from "@/components/providers/lenis-provider"
 import ScrollProgress from "@/components/scroll-progress"
@@ -112,7 +106,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
-      <body className={`${inter.variable} ${instrumentSerif.variable} bg-[#07090e] antialiased`}>
+      <body className={`${inter.className} bg-[#0a0a0a] antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

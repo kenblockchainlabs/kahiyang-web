@@ -2,39 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ==========================================================================
-   DESIGN TOKENS — one accent (jade), one scoped editorial secondary (brass)
-   Surfaces are flat. Two neutrals only. No glassmorphism.
-   ========================================================================== */
 :root {
-  /* Surfaces */
-  --bg-base:    #07090e;   /* page */
-  --bg-raised:  #0d1117;   /* the ONE card surface */
-  --bg-sunken:  #05070b;   /* footer, ticker */
+  --background: #ffffff;
+  --foreground: #171717;
+}
 
-  /* Primary accent — jade. 90% of all accent usage. */
-  --accent:        #10B981;
-  --accent-bright: #34D399;
-  --accent-deep:   #0B7A5C;
-  --accent-tint:   rgba(16, 185, 129, 0.12);
-  --accent-line:   rgba(16, 185, 129, 0.28);
-
-  /* Editorial secondary — brass. HARD RULE: [data-editorial] only. */
-  --brass:      #F5D259;
-  --brass-deep: #E8B84B;
-
-  /* Text */
-  --text-hi:  #F4F6F8;
-  --text-mid: #A1A8B3;
-  --text-lo:  #6B7280;
-
-  /* Lines */
-  --line:    rgba(255, 255, 255, 0.06);
-  --line-hi: rgba(255, 255, 255, 0.12);
-
-  /* Shadows — two tokens, one light source (from above) */
-  --shadow-card: 0 24px 80px rgba(0, 0, 0, 0.6);
-  --shadow-cta:  0 8px 24px rgba(16, 185, 129, 0.25);
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 html {
@@ -44,69 +21,74 @@ html {
 }
 
 body {
-  color: var(--text-hi);
-  background: var(--bg-base);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
 }
 
-/* Focus states — none existed anywhere in the codebase */
-:focus-visible {
-  outline: 2px solid var(--accent-bright);
-  outline-offset: 3px;
-  border-radius: 4px;
+/* Motion blur blob A */
+@keyframes motionBlurA {
+  0%   { transform: translate(0, 0) scale(1); }
+  15%  { transform: translate(30px, -20px) scale(1.1) rotate(5deg); }
+  30%  { transform: translate(-20px, 15px) scale(0.95) rotate(-3deg); }
+  50%  { transform: translate(15px, 25px) scale(1.08) rotate(2deg); }
+  65%  { transform: translate(-25px, -10px) scale(1) rotate(-4deg); }
+  80%  { transform: translate(10px, -30px) scale(1.05) rotate(3deg); }
+  100% { transform: translate(0, 0) scale(1); }
 }
 
-/* Selection */
-::selection {
-  background: rgba(16, 185, 129, 0.3);
-  color: #ffffff;
+/* Motion blur blob B */
+@keyframes motionBlurB {
+  0%   { transform: translate(0, 0) scale(1); }
+  20%  { transform: translate(-25px, 20px) scale(1.05) rotate(-3deg); }
+  40%  { transform: translate(20px, -15px) scale(0.9) rotate(4deg); }
+  55%  { transform: translate(-10px, -25px) scale(1.1) rotate(-2deg); }
+  75%  { transform: translate(25px, 10px) scale(0.95) rotate(5deg); }
+  100% { transform: translate(0, 0) scale(1); }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--bg-sunken); }
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
+/* Beep */
+@keyframes beep {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-deep); }
-
-/* ==========================================================================
-   EDITORIAL SCOPE — brass and serif cannot leak outside this boundary
-   ========================================================================== */
-[data-editorial] {
-  --accent: var(--brass);
-  --accent-bright: var(--brass);
-  --accent-line: rgba(245, 210, 89, 0.28);
-  --accent-tint: rgba(245, 210, 89, 0.1);
-  background: linear-gradient(
-    180deg,
-    #07090e 0%, #0b0906 12%, #100c07 50%, #0b0906 88%, #07090e 100%
-  );
+.animate-beep {
+  animation: beep 1.5s ease-in-out infinite;
 }
 
-/* ==========================================================================
-   MOTION GATE — animations must always reach their finished state
-   ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }
 
-/* Marquee fade mask — prevents the hard cut at both edges */
-.marquee-mask {
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%, black 8%, black 92%, transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%, black 8%, black 92%, transparent 100%
-  );
+/* Auto-scroll animation for layanan preview */
+@keyframes autoScroll {
+  0% { object-position: top; }
+  100% { object-position: bottom; }
+}
+
+/* Infinite carousel scroll */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Infinite Ticker Keyframes */
+@keyframes tickerLoop {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+.animate-ticker {
+  display: inline-block;
+  animation: tickerLoop 30s linear infinite;
+  will-change: transform;
 }
