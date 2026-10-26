@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0a; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: 'Inter', -apple-system, sans-serif; }
+
+.container {
+  width: 400px; height: 700px;
+  background: #0a0a0a;
+  position: relative; overflow: hidden;
+  border-radius: 20px;
+}
+
+.grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(200,255,0,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(200,255,0,0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.content {
+  position: relative; z-index: 10;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  height: 100%; padding: 40px; text-align: center;
+}
+
+/* Reveal text animation */
+.reveal {
+  overflow: hidden;
+}
+.reveal span {
+  display: inline-block;
+  transform: translateY(100%);
+  animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.reveal.d1 span { animation-delay: 0.2s; }
+.reveal.d2 span { animation-delay: 0.4s; }
+.reveal.d3 span { animation-delay: 0.6s; }
+.reveal.d4 span { animation-delay: 0.8s; }
+.reveal.d5 span { animation-delay: 1.0s; }
+
+@keyframes revealUp {
+  to { transform: translateY(0); }
+}
+
+/* Counter animation */
+.counter {
+  font-size: 80px; font-weight: 900; color: #C8FF00;
+  letter-spacing: -0.04em; line-height: 1;
+  opacity: 0; animation: scaleIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.2s;
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Line animation */
+.line-anim {
+  width: 0; height: 2px; background: #C8FF00;
+  margin: 20px auto;
+  animation: lineGrow 1s ease forwards 1.5s;
+}
+@keyframes lineGrow {
+  to { width: 80px; }
+}
+
+/* Stats */
+.stats-row {
+  display: flex; gap: 32px; margin-top: 40px;
+  opacity: 0; animation: fadeUp 0.8s ease forwards 1.8s;
+}
+.stat-item { text-align: center; }
+.stat-value {
+  font-size: 28px; font-weight: 900; color: #fff;
+  letter-spacing: -0.02em;
+}
+.stat-value .accent { color: #C8FF00; }
+.stat-desc {
+  font-size: 10px; color: rgba(255,255,255,0.3);
+  text-transform: uppercase; letter-spacing: 0.15em;
+  margin-top: 4px;
+}
+
+/* Floating particles */
+.particle {
+  position: absolute; width: 4px; height: 4px;
+  background: #C8FF00; border-radius: 50%;
+  opacity: 0;
+}
+.p1 { top: 20%; left: 10%; animation: float 4s ease infinite 0s; }
+.p2 { top: 60%; right: 15%; animation: float 5s ease infinite 1s; }
+.p3 { bottom: 30%; left: 20%; animation: float 3.5s ease infinite 2s; }
+.p4 { top: 40%; right: 25%; animation: float 4.5s ease infinite 0.5s; }
+@keyframes float {
+  0%, 100% { opacity: 0; transform: translateY(0); }
+  50% { opacity: 0.6; transform: translateY(-20px); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="grid"></div>
+  <div class="particle p1"></div>
+  <div class="particle p2"></div>
+  <div class="particle p3"></div>
+  <div class="particle p4"></div>
+  
+  <div class="content">
+    <div class="reveal d1"><span style="font-size:11px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.3em;font-weight:600;">Kahiyang Edu</span></div>
+    
+    <div style="margin-top:24px;">
+      <div class="reveal d2"><span style="font-size:32px;font-weight:900;color:#fff;letter-spacing:-0.03em;">Kelas Affiliate</span></div>
+      <div class="reveal d3"><span style="font-size:32px;font-weight:900;color:#C8FF00;letter-spacing:-0.03em;">TikTok Indonesia</span></div>
+    </div>
+    
+    <div class="line-anim"></div>
+    
+    <div class="counter">50+</div>
+    
+    <div style="margin-top:8px;opacity:0;animation:fadeUp 0.8s ease forwards 1.5s;">
+      <span style="font-size:12px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.15em;">Kreator Aktif</span>
+    </div>
+    
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-value">7<span class="accent">-</span>14</div>
+        <div class="stat-desc">Hari ke Komisi</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">5<span class="accent">+</span></div>
+        <div class="stat-desc">Akun Dikelola</div>
+      </div>
+    </div>
+    
+    <div style="margin-top:40px;opacity:0;animation:fadeUp 0.8s ease forwards 2.2s;">
+      <a href="#" style="display:inline-block;padding:14px 32px;border-radius:100px;background:#C8FF00;color:#0a0a0a;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;">Gabung Gratis →</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
