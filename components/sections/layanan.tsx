@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import Link from "next/link"
-import { ArrowUpRight, CheckCircle2, Flame, TrendingUp, Users, Video } from "lucide-react"
+import { ArrowUpRight, CheckCircle2, Code2, Flame, Users } from "lucide-react"
 
 const SERVICES = [
   {
@@ -18,32 +18,8 @@ const SERVICES = [
     metrics: ["500+ Creator Roster", "Endorsement Pipeline", "Revenue Share 70/30"],
   },
   {
-    id: "studio",
-    num: "(02)",
-    title: "Kahiyang Studio",
-    tagline: "AI VISUAL & PRODUCT RENDERING",
-    desc: "Studio kreatif berbasis generative AI. Menghasilkan foto produk ultra-HD, render katalog 3D, dan transisi visual dinamis untuk e-commerce.",
-    href: "https://studio.kahiyang.id",
-    icon: Video,
-    color: "from-cyan-500/20 to-transparent",
-    accent: "text-cyan-400 border-cyan-500/30",
-    metrics: ["4K Product Showcase", "Instant Virtual Staging", "Zero Studio Cost"],
-  },
-  {
-    id: "analyzer",
-    num: "(03)",
-    title: "Viral Analyzer",
-    tagline: "ALGORITHMIC AUDIT & METRICS",
-    desc: "SaaS analitik akun TikTok bertenaga AI. Membedah rasio retensi, potensi FYP, skor kesehatan profil, dan rekomendasi audio trending harian.",
-    href: "https://analyzer.kahiyang.id",
-    icon: TrendingUp,
-    color: "from-amber-500/20 to-transparent",
-    accent: "text-amber-400 border-amber-500/30",
-    metrics: ["98.4% Accuracy Index", "Live Competitor Spy", "Audio Trend Predictor"],
-  },
-  {
     id: "affiliate",
-    num: "(04)",
+    num: "(02)",
     title: "Kelas Affiliate TikTok",
     tagline: "INTENSIVE MENTORSHIP & WORKSHOP",
     desc: "Pelatihan live dan playbook taktis menghasilkan puluhan juta dari TikTok Shop tanpa harus joget-joget atau punya modal besar.",
@@ -55,15 +31,15 @@ const SERVICES = [
   },
   {
     id: "web-dev",
-    num: "(05)",
-    title: "Web Engineering & Cinematic UI",
-    tagline: "HIGH-END PROFESSIONAL STANDARD SITES",
-    desc: "Bukan web enginer norak — jasa pembuatan website profesional standar agensi global. Rapi, detail, dan solid untuk brand yang ingin mendominasi pasar digital.",
+    num: "(03)",
+    title: "Web Development",
+    tagline: "CUSTOM WEBSITE & LANDING PAGE",
+    desc: "Bikin website dan landing page sesuai kebutuhan bisnis. Desain responsif, loading cepat, dan struktur yang jelas supaya pengunjung tahu harus ngapain.",
     href: "https://t.me/kahiyang_partnership",
-    icon: Flame,
-    color: "from-emerald-500/25 via-cyan-500/15 to-transparent",
-    accent: "text-emerald-400 border-emerald-500/40",
-    metrics: ["Standar Agensi Global", "Detail-Oriented Craft", "Tailor-Made Zero Templates"],
+    icon: Code2,
+    color: "from-cyan-500/25 via-emerald-500/15 to-transparent",
+    accent: "text-cyan-400 border-cyan-500/40",
+    metrics: ["Zero Templates", "Mobile-First", "Fast Load"],
     isFullWidth: true
   },
 ]

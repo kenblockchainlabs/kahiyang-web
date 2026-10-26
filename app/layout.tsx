@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "konten kreator",
     "affiliate marketing",
     "tools AI",
-    "Kahiyang Studio",
+    "Kahiyang Agency",
     "Kahiyang Visual",
   ],
   authors: [{ name: "Kahiyang", url: "https://kahiyang.id" }],

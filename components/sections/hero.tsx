@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import dynamic from "next/dynamic"
-import { ArrowUpRight, Sparkles, Users, Play, Radio } from "lucide-react"
+import { ArrowUpRight, Sparkles, Users, Radio } from "lucide-react"
 
 const InteractiveFluidCanvas = dynamic(
   () => import("@/components/ui/interactive-fluid-canvas"),
@@ -189,7 +189,7 @@ export default function Hero() {
         <div className="lg:col-span-6 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300 backdrop-blur-md shadow-inner">
             <Sparkles className="size-3.5 text-emerald-400" />
-            <span>SAAS, TALENTA TIKTOK AFFILIATE &amp; STUDIO AI GENERATIVE</span>
+            <span>TALENTA TIKTOK AFFILIATE, KELAS MENTORING &amp; WEB DEVELOPMENT</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white uppercase tracking-tight leading-[0.92]">
@@ -224,32 +224,32 @@ export default function Hero() {
         {/* Right Column: 2 Ultra-Luxury Specimen Pods */}
         <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-5 relative overflow-visible">
           
-          {/* POD 1: AI STUDIO 4K SHOWCASE POD (DENGAN VISUAL CINEMA) */}
+          {/* POD 1: AGENCY PERFORMANCE POD */}
           <div 
             ref={leftCardRef}
             className="p-5 sm:p-6 rounded-[34px] bg-gradient-to-b from-white/[0.12] via-white/[0.04] to-black/80 border border-white/20 hover:border-emerald-500/70 shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl will-change-transform origin-center group"
           >
             <div className="flex items-center justify-between font-mono text-[10px] text-zinc-400 mb-3">
               <span className="text-emerald-400 font-bold flex items-center gap-1.5">
-                <Radio className="size-3 animate-pulse text-emerald-400" /> KAHIYANG STUDIO
+                <Radio className="size-3 animate-pulse text-emerald-400" /> KAHIYANG AGENCY
               </span>
-              <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[9px]">4K RENDER</span>
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[9px]">LIVE</span>
             </div>
 
-            {/* Visual Media Canvas Pod */}
+            {/* Specimen Media Pod */}
             <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-emerald-950/60 via-black to-cyan-950/60 border border-white/15 p-4 flex flex-col justify-between mb-3 shadow-inner relative overflow-hidden group-hover:border-emerald-500/40 transition-colors">
               <div className="absolute inset-0 bg-[radial-gradient(#10B981_1px,transparent_1px)] [background-size:16px_16px] opacity-25" />
               
               <div className="flex items-center justify-between relative z-10">
-                <span className="px-2 py-0.5 rounded-md bg-black/60 border border-white/10 text-[9px] font-mono text-zinc-300 flex items-center gap-1">
-                  <Play className="size-2.5 fill-emerald-400 text-emerald-400" /> AI REEL
+                <span className="px-2 py-0.5 rounded-md bg-black/60 border border-white/10 text-[9px] font-mono text-zinc-300">
+                  TIKTOK SHOP
                 </span>
-                <span className="text-[10px] font-mono text-emerald-400 font-bold">60 FPS</span>
+                <span className="text-[10px] font-mono text-emerald-400 font-bold">70/30 SPLIT</span>
               </div>
 
               <div className="relative z-10 space-y-1">
-                <span className="font-mono text-3xl font-black text-white tracking-tight drop-shadow-md">98.4%</span>
-                <span className="text-[10px] font-mono text-emerald-400 block font-semibold">+420k Viral Reach</span>
+                <span className="font-mono text-3xl font-black text-white tracking-tight drop-shadow-md">500+</span>
+                <span className="text-[10px] font-mono text-emerald-400 block font-semibold">Active Creators</span>
               </div>
 
               <div className="w-full h-1.5 rounded-full bg-white/10 overflow-hidden relative z-10">
@@ -258,9 +258,9 @@ export default function Hero() {
             </div>
 
             <h4 className="font-sans text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">
-              Viral Analyzer &amp; Studio
+              Talent &amp; Brand Network
             </h4>
-            <p className="text-[11px] text-zinc-400 mt-1 line-clamp-2">Audit algoritma konten &amp; render visual produk 3D instan.</p>
+            <p className="text-[11px] text-zinc-400 mt-1 line-clamp-2">Kreator TikTok Shop terhubung langsung ke brand, split transparan.</p>
           </div>
 
           {/* POD 2: TALENT NETWORK VIP POD */}
