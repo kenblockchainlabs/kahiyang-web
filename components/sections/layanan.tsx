@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import Link from "next/link"
 import { ArrowUpRight, CheckCircle2, Code2, Flame, Users } from "lucide-react"
+import { ScrambleText } from "@/components/ui/scramble-text"
 
 const SERVICES = [
   {
@@ -114,7 +115,7 @@ export default function Layanan() {
             <span className="text-zinc-300 uppercase tracking-widest font-mono">CORE SERVICES &bull; 3D FLIP ARCHITECTURE</span>
           </div>
           <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold text-white uppercase leading-[0.92]">
-            Eksplor Layanan <br />
+            <ScrambleText text="Eksplor Layanan" /> <br />
             <span className="bg-gradient-to-r from-white via-zinc-200 to-emerald-400 bg-clip-text text-transparent font-serif italic lowercase text-[0.88em]">
               ekosistem kami.
             </span>

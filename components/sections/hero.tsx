@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import dynamic from "next/dynamic"
 import { ArrowUpRight, Sparkles, Users, Radio } from "lucide-react"
+import MagneticLink from "@/components/ui/magnetic-link"
 
 const InteractiveFluidCanvas = dynamic(
   () => import("@/components/ui/interactive-fluid-canvas"),
@@ -16,12 +17,23 @@ export default function Hero() {
   const titleWrapperRef = useRef<HTMLDivElement>(null)
   const leftCardRef = useRef<HTMLDivElement>(null)
   const rightCardRef = useRef<HTMLDivElement>(null)
+  const causticRef = useRef<HTMLDivElement>(null)
+  const heroSectionRef = useRef<HTMLDivElement>(null)
 
   const [scrollProg, setScrollProg] = useState(0)
 
   useEffect(() => {
     let rafId: number
+    let onScreen = true
     const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 }
+
+    // RAF GATING — the loop stops doing work the moment the hero leaves the
+    // viewport. Without this, five loops run forever on a phone.
+    const io = new IntersectionObserver(
+      ([entry]) => { onScreen = entry.isIntersecting },
+      { rootMargin: "20% 0px" }
+    )
+    if (heroSectionRef.current) io.observe(heroSectionRef.current)
 
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window
@@ -34,6 +46,7 @@ export default function Hero() {
     // LENIS SHOWCASE MASTER ENGINE: SPECULAR CHROME + 3D ANAMORPHIC DEPTH
     // =========================================================================
     const renderMotion = () => {
+      if (onScreen) {
       const win = window as unknown as { lenis?: { scroll: number } }
       const scrollY = (win.lenis && typeof win.lenis.scroll === "number")
         ? win.lenis.scroll
@@ -74,13 +87,44 @@ export default function Hero() {
         rightCardRef.current.style.transform = `perspective(1200px) translate3d(${lateralShift}px, 0, 0) rotateX(${cardTiltX}deg) rotateY(${cardTiltY + rotateDeg}deg)`
       }
 
-      // 3. LETTER RIPPLE
+      {/* 3. THE REFRACTION — the wordmark as a slab of optical glass.
+          Per-letter Z separation driven by scroll, pointer-driven lateral
+          displacement, and a specular highlight that sweeps across the
+          letterforms. On scroll past 25% the letters separate along Z so
+          you see INTO the brand. */}
+      const zSeparation = progress * 140
       lettersRef.current.forEach((tspan, idx) => {
         if (!tspan) return
-        const wave = Math.sin(Date.now() * 0.002 + idx * 0.6) * 3.5
-        const charOffset = mouse.x * (idx - 3.5) * 3
-        tspan.style.transform = `translate3d(${charOffset}px, ${wave}px, 0)`
+        const depth = (idx - 3) / 3                    // -1 → 1, K → G
+        const z = depth * zSeparation
+        const wave = Math.sin(Date.now() * 0.0016 + idx * 0.55) * 2.5
+        const charOffset = mouse.x * (idx - 3.5) * 4.5
+        tspan.style.transform =
+          `translate3d(${charOffset}px, ${wave}px, ${z}px) ` +
+          `rotateY(${-mouse.x * depth * 6}deg) rotateX(${mouse.y * depth * 4}deg)`
+        tspan.style.opacity = `${1 - Math.abs(depth) * progress * 0.35}`
       })
+
+      // 4. SPECULAR SWEEP — the highlight stop tracks pointer X
+      const sheen = document.getElementById("chromeSheen")
+      if (sheen) {
+        const stops = sheen.querySelectorAll("stop")
+        const sweep = ((mouse.x + 1) / 2) * 100
+        if (stops[2]) stops[2].setAttribute("offset", `${Math.max(20, Math.min(80, sweep - 12))}%`)
+        if (stops[3]) stops[3].setAttribute("offset", `${Math.max(24, Math.min(84, sweep + 12))}%`)
+      }
+
+      // 5. CAUSTIC — emerald light focused through the glass, cast onto the
+      //    page below the wordmark. Branded: the caustic is Kahiyang's colour.
+      if (causticRef.current) {
+        const cx = ((mouse.x + 1) / 2) * 100
+        causticRef.current.style.background =
+          `radial-gradient(circle at ${cx}% 50%, rgba(16,185,129,0.30) 0%, rgba(52,211,153,0.12) 35%, transparent 70%)`
+        causticRef.current.style.opacity = `${0.55 + progress * 0.45}`
+        causticRef.current.style.transform =
+          `translate3d(0, ${scrollY * 0.12}px, 0) scale(${1 + progress * 0.3})`
+      }
+      }
 
       rafId = requestAnimationFrame(renderMotion)
     }
@@ -90,12 +134,13 @@ export default function Hero() {
     return () => {
       cancelAnimationFrame(rafId)
       window.removeEventListener("mousemove", handleMouseMove)
+      io.disconnect()
     }
   }, [])
 
   return (
     <section
-      ref={containerRef}
+      ref={heroSectionRef}
       className="relative min-h-[98vh] w-full flex flex-col justify-between pt-20 pb-12 px-4 sm:px-8 md:px-14 max-w-[1600px] mx-auto z-10 select-none overflow-hidden"
       style={{ perspective: "1400px" }}
     >
@@ -147,7 +192,7 @@ export default function Hero() {
       >
         <svg
           viewBox="0 0 1200 170"
-          className="w-full h-auto max-h-[220px] text-white overflow-visible select-none pointer-events-none filter drop-shadow-[0_25px_80px_rgba(16,185,129,0.4)]"
+          className="w-full h-auto max-h-[220px] text-white overflow-visible select-none pointer-events-none"
           fill="currentColor"
         >
           <defs>
@@ -158,11 +203,51 @@ export default function Hero() {
               <stop offset="70%" stopColor="#38bdf8" />
               <stop offset="100%" stopColor="#ffffff" />
             </linearGradient>
+            {/* Chromatic aberration — R and B channels, screen-blended,
+                offset ±2px. Edges split where the specular crosses. */}
+            <linearGradient id="chromaR" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#ff2d55" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#ff2d55" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="chromaB" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#00a3ff" stopOpacity="0" />
+              <stop offset="100%" stopColor="#00a3ff" stopOpacity="0.5" />
+            </linearGradient>
           </defs>
+
+          {/* R channel — offset left, screen blend */}
+          <text
+            x="2"
+            y="142"
+            className="font-black text-[165px] tracking-[-0.045em] uppercase"
+            fill="url(#chromaR)"
+            style={{ fontFamily: "var(--font-display), system-ui, sans-serif", fontVariationSettings: '"opsz" 96, "wdth" 88', mixBlendMode: "screen" }}
+            aria-hidden
+          >
+            {"KAHIYANG".split("").map((char, index) => (
+              <tspan key={index} dx={index === 0 ? "0" : "4"}>{char}</tspan>
+            ))}
+          </text>
+
+          {/* B channel — offset right, screen blend */}
+          <text
+            x="-2"
+            y="142"
+            className="font-black text-[165px] tracking-[-0.045em] uppercase"
+            fill="url(#chromaB)"
+            style={{ fontFamily: "var(--font-display), system-ui, sans-serif", fontVariationSettings: '"opsz" 96, "wdth" 88', mixBlendMode: "screen" }}
+            aria-hidden
+          >
+            {"KAHIYANG".split("").map((char, index) => (
+              <tspan key={index} dx={index === 0 ? "0" : "4"}>{char}</tspan>
+            ))}
+          </text>
+
+          {/* Main chrome face — the refractive slab */}
           <text
             x="0"
             y="142"
-            className="font-black text-[165px] tracking-[-0.045em] uppercase select-none"
+            className="font-black text-[165px] tracking-[-0.045em] uppercase"
             fill="url(#chromeSheen)"
             style={{ fontFamily: "var(--font-display), system-ui, sans-serif", fontVariationSettings: '"opsz" 96, "wdth" 88' }}
           >
@@ -180,6 +265,15 @@ export default function Hero() {
             ))}
           </text>
         </svg>
+
+        {/* CAUSTIC — emerald light focused through the glass slab, cast onto
+            the page below the wordmark. Branded: it is Kahiyang's own colour. */}
+        <div
+          ref={causticRef}
+          className="pointer-events-none absolute left-0 right-0 top-[58%] h-[180px] blur-[40px] mix-blend-screen will-change-[opacity,transform] z-10"
+          style={{ opacity: 0.55 }}
+          aria-hidden
+        />
       </div>
 
       {/* Main Split Grid: Confident Power Headline + Luxury Specimen Pods */}
@@ -203,21 +297,15 @@ export default function Hero() {
             Inkubator kreator, studio produksi visual AI, dan infrastruktur automasi TikTok affiliate. Kami membangun ekosistem di mana talenta, konten viral, dan teknologi bekerja menghasilkan dampak nyata.
           </p>
 
-          <div className="pt-2 flex flex-wrap items-center gap-4 font-mono text-xs font-bold">
-            <Link
-              href="#layanan"
-              className="px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold transition-all duration-300 flex items-center gap-2 shadow-xl shadow-emerald-500/30 hover:scale-105 active:scale-95"
-            >
+          <div className="pt-2 flex flex-wrap items-center gap-4 font-sans text-sm font-semibold tracking-[0.01em]">
+            <MagneticLink href="#layanan" className="px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-semibold transition-colors duration-300 flex items-center gap-2 shadow-[0_0_0_1px_rgba(16,185,129,0.5),0_8px_32px_-8px_rgba(16,185,129,0.55),0_0_64px_-16px_rgba(16,185,129,0.4)]">
               <span>EKSPLOR LAYANAN</span>
               <span>↓</span>
-            </Link>
-            <Link
-              href="#partnership"
-              className="px-7 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/15 backdrop-blur-md transition-all duration-300 flex items-center gap-2 hover:scale-105 active:scale-95 shadow-lg"
-            >
+            </MagneticLink>
+            <MagneticLink href="#partnership" className="px-7 py-4 rounded-full glass text-white flex items-center gap-2">
               <span>GABUNG KOMUNITAS</span>
               <ArrowUpRight className="size-4" />
-            </Link>
+            </MagneticLink>
           </div>
         </div>
 

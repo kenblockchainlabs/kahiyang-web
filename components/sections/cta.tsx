@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import Link from "next/link"
 import { ArrowUpRight, MessageCircle, Sparkles, Zap } from "lucide-react"
+import MagneticLink from "@/components/ui/magnetic-link"
 
 export default function CTA() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -159,27 +159,27 @@ export default function CTA() {
         <div 
           ref={buttonsGroupRef}
           style={{ transform: "translate3d(0, 70px, 0) scale(0.85)" }}
-          className="flex flex-wrap items-center justify-center gap-5 pt-3 font-mono text-xs font-bold relative z-10 will-change-transform"
+          className="flex flex-wrap items-center justify-center gap-5 pt-3 font-sans text-sm font-semibold relative z-10 will-change-transform"
         >
-          <Link
+          <MagneticLink
             href="https://t.me/kahiyang_id"
-            target="_blank"
-            className="px-9 py-5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold flex items-center gap-3 transition-all duration-300 shadow-2xl shadow-emerald-500/40 hover:scale-110 active:scale-95 group text-sm"
+            external
+            className="px-9 py-5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-semibold gap-3 shadow-[0_0_0_1px_rgba(16,185,129,0.5),0_8px_32px_-8px_rgba(16,185,129,0.55),0_0_64px_-16px_rgba(16,185,129,0.4)] group"
           >
             <MessageCircle className="size-5 group-hover:rotate-12 transition-transform" />
             <span>GABUNG TELEGRAM VIP</span>
             <ArrowUpRight className="size-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </Link>
+          </MagneticLink>
 
-          <Link
+          <MagneticLink
             href="https://wa.me/6285648492958?text=Halo%20Admin%20Negeri%20Kahiyang%2C%20saya%20tertarik%20kerjasama%20ekosistem"
-            target="_blank"
-            className="px-9 py-5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md flex items-center gap-3 transition-all duration-300 hover:scale-105 active:scale-95 text-sm"
+            external
+            className="px-9 py-5 rounded-full glass text-white gap-3"
           >
             <Sparkles className="size-4 text-emerald-400" />
             <span>HUBUNGI PARTNERSHIP</span>
             <ArrowUpRight className="size-4" />
-          </Link>
+          </MagneticLink>
         </div>
 
       </div>
